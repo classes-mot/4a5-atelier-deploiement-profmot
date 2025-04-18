@@ -5,16 +5,15 @@ import { connectDB } from './util/bd.js';
 import messageRoutes from './routes/messages-routes.js';
 
 
-const MONGODB_URI = 'mongodb://localhost:27017/db-deploy';
-
-// Connexion à MongoDB
-await connectDB(MONGODB_URI);
 
 
 const app = express();
 // chercher les variables d'environnemnt
-const PORT = 5000;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/db-deploy';
+const PORT = process.env.PORT ||5000;
 // section des middlewares
+// Connexion à MongoDB
+await connectDB(MONGODB_URI);
 
 app.use(express.json());
 
